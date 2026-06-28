@@ -130,18 +130,29 @@ h2, h3 {
     border: 1px solid rgba(255, 255, 255, 0.15);
     color: var(--txt);
     box-shadow: none;
+    border-radius: 13px;
 }
 
 .btn.warn{
     background: linear-gradient(180deg, #f59e0b, #eab308);
+    font-weight: 900;
+    border-radius: 13px;
+    padding: 8px 10px;
 }
 
 .btn.ok{
-    background: linear-gradient(180deg, #34d399, #22c55e);
+    background: linear-gradient(180deg, #37c692, #368754);
+    font-weight: 900;
+    border-radius: 13px;
+    padding: 10px 12px;
+    letter-spacing: 0.3px;
 }
 
 .btn.error{
     background: linear-gradient(180deg, #fb7185, #ef4444);
+    font-weight: 900;
+    border-radius: 13px;
+    padding: 8px 10px;
 }
 
 .select, select, .text{
@@ -171,6 +182,7 @@ textarea.text {
     color: rgba(255,255,255,0.65);
     font-weight: 600;
     transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .tab:hover {
@@ -179,8 +191,71 @@ textarea.text {
 }
 
 .tab.active {
-    color: white;
+    color: rgb(46, 208, 100);
     background: rgba(20,158,202,0.15);
     border-color: rgba(16, 36, 43, 0.5);
-    box-shadow: inset 0 0 20px rgba(20, 156, 202, 0.462), 0 0 15px rgba(14, 119, 154, 0.655);
+    box-shadow: inset 0 0 20px rgba(9, 62, 30, 0.462), 0 0 15px rgba(11, 40, 50, 0.655);
+    animation: pulseGlow 2s ease-in-out infinite;
+}
+
+@keyframes pulseGlow {
+    0%, 100% {
+        box-shadow: inset 0 0 20px rgba(11, 78, 101, 0.257), 0 0 15px rgba(4, 120, 158, 0.2);
+    }
+    50% {
+        box-shadow:inset 0 0 25px rgba(11, 96, 124, 0.25), 0 0 25px rgba(20,158,202,0.4);
+    }
+}
+
+.editor-wrap {
+    position: relative;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    overflow: hidden;
+    min-height: 280px;
+    background-color: #0b1020;
+}
+
+.editor {
+    inline-size: 100%;
+    block-size: 380px;
+}
+
+iframe.preview {
+    inline-size: 100%;
+    block-size: 380px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 14px;
+    background-color: #fff;
+}
+
+.out{
+    background-color: #0a0e1a;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 12px;
+    padding: 20px;
+    min-height: 250px;
+    overflow: auto;
+    white-space: pre-wrap;
+}
+
+.footer {
+    opacity: 0.7;
+    font-size: 15px;
+    text-align: center;
+    padding: 12px;
+}
+
+.kbd{
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: #0e1324;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
+    padding: 2px 6px;
+}
+
+.label {
+    list-style: circle;
+    font-size: 15px;
+    color: var(--muted)
 }
