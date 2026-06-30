@@ -19,6 +19,10 @@ const out = $("#output");
 const preview = $("preview"); 
 const STORAGE_KEY = "galhoum-code-editor";
 
+/*
+ * Escapes special HTML characters to prevent
+ * HTML injection when displaying user-generated content.
+ */
 const escapeHtml = s => 
     String(s).replace(/[&<>"]/g, c => ({
         '&': "&amp;",
@@ -28,6 +32,19 @@ const escapeHtml = s =>
     }[c]
 ));
 
+const escapeHtml = s => 
+    String(s).replace(/[&<>"]/g, c => ({
+        '&': "&amp;",
+        '<': "&lt;",
+        '>': "&gt;",
+        '"': "&quot;"
+    }[c]
+));
+
+/*
+ * Appends a timestamped message to the output console
+ * using a color that matches the message type.
+ */
 function log(msg, type = 'info'){
     const color = type === "error" ? 'var(--err)' : type === "warn" ? 'var(--warn)' : 'var(--brand)';
     const time = new Date().toLocaleTimeString();
@@ -37,12 +54,20 @@ function log(msg, type = 'info'){
     out.scrollTop = out.scrollHeight;
 }
 
+/*
+ * Clears all messages from the output console,
+ * giving the user a fresh logging area.
+ */
 function clearOut() {
     out.innerHTML = "";
 }
 
 $("clearOut")?.addEventListener("click", clearOut);
 
+/*
+ * Clears all messages from the output console,
+ * giving the user a fresh logging area.
+ */
 function makeEditor(id, mode){
     const ed = ace.edit(id, {
         theme: "ace/theme/monokai",
@@ -68,3 +93,25 @@ function makeEditor(id, mode){
     return ed;
 }
 
+const ed_html = makeEditor("ed-html", "ace/mode/html");
+const ed_css = makeEditor("ed_css", "ace/mode/css");
+const ed_js = makeEditor("ed_js", "ace/mode/javascript");
+
+const TAB_ORDER = ["html", "css", "js"];
+
+const wraps = Object.fromEntries($$("#webEditors .editor-wrap")).map(w => [w.dataset.pane, w]);
+
+const editors = {
+    html: ed_html,
+    css: ed_css,
+    js: ed_js
+};
+
+/*
+ * Returns the identifier of the currently active
+ * editor tab, defaulting to the HTML editor.
+ */
+function activePane(){
+    const t = $("#webTabs .tab.active");
+    return t ? t.dataset.pane : "html";
+}
