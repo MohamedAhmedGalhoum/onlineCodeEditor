@@ -213,18 +213,18 @@ function loadProject(obj){
 
 function setDefaultContent(){
   ed_html.setValue(`<!-- Welcome card -->
-<section class="card" style="max-width:520px;margin:24px auto;padding:18px;text-align:center">
-  <h1>Welcome to the Academy</h1>
-  <p>This example runs locally in the browser.</p>
-  <button id="btn">Try me</button>
-</section>`, -1);
+    <section class="card" style="max-width:520px;margin:24px auto;padding:18px;text-align:center">
+        <h1>Welcome to Galhoum code editor</h1>
+        <p>This example runs locally in the browser.</p>
+        <button id="btn">Try me</button>
+    </section>`, -1);
 
   ed_css.setValue(`body{font-family:system-ui;background:#f7fafc;margin:0}
-h1{color:#0f172a}
-#btn{padding:.75rem 1rem;border:0;border-radius:10px;background:#60a5fa;color:#08111f;font-weight:700}`, -1);
+                    h1{color:#0f172a}
+        #btn{padding:.75rem 1rem;border:0;border-radius:10px;background:#60a5fa;color:#08111f;font-weight:700}`, -1);
 
   ed_js.setValue(`document.getElementById('btn').addEventListener('click',()=>alert('Well done!'));
-console.log('Hello from JavaScript!');`, -1);
+                console.log('Hello from JavaScript!');`, -1);
 }
 
 
@@ -235,7 +235,7 @@ function saveProject(){
     const blob = new Blob([data], {type:'application/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'academy-web.json';
+    a.download = 'Galhoum-web.json';
     a.click();
     log('Saved locally and downloaded JSON file.');
   }catch(e){ log('Unable to save: '+e, 'error'); }
@@ -254,7 +254,9 @@ $('#openFile')?.addEventListener('change', async (e)=>{
 try{
   const cache = localStorage.getItem(STORAGE_KEY);
   if(cache){ loadProject(JSON.parse(cache)); }
-  else { setDefaultContent(); }
+  else {
+    setDefaultContent(); 
+}
 }catch{ setDefaultContent(); }
 
 log('Ready — Web-only Editor (HTML/CSS/JS) ✨');
